@@ -1,0 +1,29 @@
+[Unit]
+Description=parsedmarc -> Discord webhook relay
+After=network-online.target
+Wants=network-online.target
+# parsedmarc should start after the relay so early POSTs don't get refused
+Before=parsedmarc.service
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/dmarc-to-discord.env
+ExecStart=/usr/local/bin/dmarc_to_discord.py
+Restart=on-failure
+RestartSec=5
+
+# Sandboxing — no filesystem writes needed at all
+DynamicUser=true
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_INET AF_INET6
+LockPersonality=true
+MemoryDenyWriteExecute=true
+
+[Install]
+WantedBy=multi-user.target
