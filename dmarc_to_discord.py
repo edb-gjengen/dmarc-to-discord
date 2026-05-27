@@ -84,11 +84,12 @@ def build_metadata_embed(report):
          "value": f"**Records:** {len(records)}\n**Messages:** {total}\n**DMARC pass:** {passing} / {total}",
          "inline": False},
     ]
-    if errors := (meta.get("errors") or []):
+    errors = meta.get("errors") or []
+    if errors:
         fields.append({"name": "Errors",
                        "value": truncate("\n".join(f"• {e}" for e in errors)), "inline": False})
     return {"title": f"DMARC Aggregate Report — {policy.get('domain', 'unknown')}",
-            "color": COLOR_INFO, "fields": fields}
+            "color": COLOR_PARTIAL if errors else COLOR_INFO, "fields": fields}
 
 
 def diagnose_record(record):
