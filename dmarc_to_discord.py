@@ -42,7 +42,7 @@ def result_icon(r): return {"pass": "✅", "fail": "❌", "softfail": "⚠️",
                             "neutral": "➖", "temperror": "⚠️", "permerror": "⚠️"}.get(r or "", "❓")
 
 
-def bool_icon(b): return "✅" if b else "❌"
+def bool_icon(b): return "✅" if b is True else "❌" if b is False else "❔"
 
 
 def record_color(record):
