@@ -83,6 +83,46 @@ def build_metadata_embed(report):
             "color": COLOR_INFO, "fields": fields}
 
 
+def diagnose_record(record):
+    """One-line explanation of why DMARC passed or failed for this record."""
+    align = record.get("alignment") or {}
+    auth = record.get("auth_results") or {}
+    ids = record.get("identifiers") or {}
+    header_from = ids.get("header_from") or "?"
+    spf_results = auth.get("spf") or []
+    dkim_results = auth.get("dkim") or []
+
+    dmarc = align.get("dmarc")
+    if dmarc is None:
+        return None  # parsedmarc didn't supply alignment; don't fabricate a verdict
+
+    if dmarc:
+        via = [name for name, ok in (("SPF", align.get("spf")), ("DKIM", align.get("dkim"))) if ok]
+        return "✅ **DMARC pass** — aligned via " + (" + ".join(via) if via else "?")
+
+    parts = []
+    spf_pass = next((r for r in spf_results if (r.get("result") or "").lower() == "pass"), None)
+    if not spf_results:
+        parts.append("SPF not evaluated")
+    elif spf_pass:
+        parts.append(f"SPF passed on `{spf_pass.get('domain', '?')}` (not aligned with `{header_from}`)")
+    else:
+        worst = spf_results[0]
+        parts.append(f"SPF `{worst.get('result', '?')}` on `{worst.get('domain', '?')}`")
+
+    dkim_pass = next((r for r in dkim_results if (r.get("result") or "").lower() == "pass"), None)
+    if not dkim_results:
+        parts.append("DKIM not signed")
+    elif dkim_pass:
+        parts.append(f"DKIM passed on `{dkim_pass.get('domain', '?')}` (not aligned with `{header_from}`)")
+    else:
+        failed = ", ".join(f"`{r.get('domain', '?')}`/`{r.get('selector', '?')}`→`{r.get('result', '?')}`"
+                           for r in dkim_results)
+        parts.append(f"DKIM failed ({failed})")
+
+    return "❌ **DMARC fail** — " + "; ".join(parts)
+
+
 def build_record_embed(record, idx, total):
     src, align = record.get("source", {}), record.get("alignment", {})
     pol, ids, auth = record.get("policy_evaluated", {}), record.get("identifiers", {}), record.get("auth_results", {})
@@ -99,6 +139,10 @@ def build_record_embed(record, idx, total):
         {"name": "Source",
          "value": f"**IP:** `{src.get('ip_address', '?')}` ({src.get('country', '??')})\n"
                   f"**rDNS:** `{rdns}`\n**ASN:** {as_str}", "inline": False},
+    ]
+    if verdict := diagnose_record(record):
+        fields.append({"name": "Verdict", "value": truncate(verdict), "inline": False})
+    fields += [
         {"name": "Messages", "value": f"**{record.get('count', 0)}**", "inline": True},
         {"name": "Disposition", "value": f"`{pol.get('disposition', '?')}`", "inline": True},
         {"name": "Identifiers", "value": "\n".join(from_lines), "inline": False},
