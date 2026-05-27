@@ -46,11 +46,15 @@ def bool_icon(b): return "✅" if b else "❌"
 
 
 def record_color(record):
-    if record.get("alignment", {}).get("dmarc"):
+    # Drive color by DMARC alignment, not by disposition: on a p=none policy every
+    # failure has disposition=none, and we don't want real spoofing to look the same
+    # as benign forwarder noise.
+    dmarc = (record.get("alignment") or {}).get("dmarc")
+    if dmarc is True:
         return COLOR_PASS
-    if record.get("policy_evaluated", {}).get("disposition") in ("quarantine", "reject"):
+    if dmarc is False:
         return COLOR_FAIL
-    return COLOR_PARTIAL
+    return COLOR_PARTIAL  # alignment missing → unknown
 
 
 def build_metadata_embed(report):
