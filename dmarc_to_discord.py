@@ -131,7 +131,7 @@ def diagnose_record(record):
     return "❌ **DMARC fail** — " + "; ".join(parts)
 
 
-def build_record_embed(record, idx, total):
+def build_record_embed(record, idx, total, policy_domain=None):
     src, align = record.get("source", {}), record.get("alignment", {})
     pol, ids, auth = record.get("policy_evaluated", {}), record.get("identifiers", {}), record.get("auth_results", {})
     rdns = src.get("reverse_dns") or "—"
@@ -147,7 +147,11 @@ def build_record_embed(record, idx, total):
         sender_bits.append(f"`{base}`")
     sender_line = " ".join(sender_bits) + "\n" if sender_bits else ""
 
-    from_lines = [f"**Header From:** `{ids.get('header_from', '?')}`",
+    header_from = ids.get("header_from") or "?"
+    hf_note = ""
+    if policy_domain and header_from != "?" and header_from.lower() != policy_domain.lower():
+        hf_note = "  *(subdomain — `sp` applies)*"
+    from_lines = [f"**Header From:** `{header_from}`{hf_note}",
                   f"**Envelope From:** `{ids.get('envelope_from') or '—'}`"]
     if env_to := ids.get("envelope_to"):
         from_lines.append(f"**Envelope To:** `{env_to}`")
@@ -191,8 +195,9 @@ def build_record_embed(record, idx, total):
 def send_to_discord(report):
     embeds = [build_metadata_embed(report)]
     records = report.get("records", [])
+    policy_domain = (report.get("policy_published") or {}).get("domain")
     for i, rec in enumerate(records, start=1):
-        embeds.append(build_record_embed(rec, i, len(records)))
+        embeds.append(build_record_embed(rec, i, len(records), policy_domain))
 
     for i in range(0, len(embeds), MAX_EMBEDS_PER_MESSAGE):
         payload = {"embeds": embeds[i: i + MAX_EMBEDS_PER_MESSAGE], "username": "parsedmarc"}
