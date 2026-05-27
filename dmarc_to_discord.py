@@ -38,8 +38,8 @@ def truncate(s: str, n: int = MAX_FIELD_VALUE_LEN) -> str:
     return s if len(s) <= n else s[: n - 3] + "..."
 
 
-def result_icon(r): return {"pass": "✅", "fail": "❌", "softfail": "⚠️",
-                            "neutral": "➖", "temperror": "⚠️", "permerror": "⚠️"}.get(r or "", "❓")
+def result_icon(r): return {"pass": "✅", "fail": "❌", "softfail": "⚠️", "neutral": "➖",
+                            "none": "➖", "temperror": "⚠️", "permerror": "⚠️"}.get(r or "", "❓")
 
 
 def bool_icon(b): return "✅" if b is True else "❌" if b is False else "❔"
