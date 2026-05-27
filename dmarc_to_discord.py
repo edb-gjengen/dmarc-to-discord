@@ -64,9 +64,13 @@ def build_metadata_embed(report):
     total = sum(r.get("count", 0) for r in records)
     passing = sum(r.get("count", 0) for r in records if r.get("alignment", {}).get("dmarc"))
 
+    reporter_lines = [meta.get("org_name", "unknown"), meta.get("org_email", "")]
+    if extra := meta.get("org_extra_contact_info"):
+        reporter_lines.append(extra)
+
     fields = [
         {"name": "Reporter",
-         "value": f"{meta.get('org_name', 'unknown')}\n{meta.get('org_email', '')}", "inline": True},
+         "value": "\n".join(filter(None, reporter_lines)), "inline": True},
         {"name": "Report ID", "value": f"`{meta.get('report_id', 'unknown')}`", "inline": True},
         {"name": "Timespan (UTC)",
          "value": f"{meta.get('begin_date', '?')} →\n{meta.get('end_date', '?')}", "inline": False},
@@ -74,7 +78,7 @@ def build_metadata_embed(report):
          "value": (f"**Domain:** `{policy.get('domain', '?')}`\n"
                    f"**p / sp:** `{policy.get('p', '?')}` / `{policy.get('sp', '?')}`\n"
                    f"**adkim / aspf:** `{policy.get('adkim', '?')}` / `{policy.get('aspf', '?')}`\n"
-                   f"**pct:** `{policy.get('pct', '?')}`  •  **fo:** `{policy.get('fo', '?')}`"),
+                   f"**pct:** `{policy.get('pct') or '100'}`  •  **fo:** `{policy.get('fo', '?')}`"),
          "inline": False},
         {"name": "Summary",
          "value": f"**Records:** {len(records)}\n**Messages:** {total}\n**DMARC pass:** {passing} / {total}",
@@ -133,6 +137,15 @@ def build_record_embed(record, idx, total):
     rdns = src.get("reverse_dns") or "—"
     asn = src.get("asn")
     as_str = f"AS{asn} ({src.get('as_name', '?')})" if asn else "—"
+    if asn and (as_domain := src.get("as_domain")):
+        as_str += f" — `{as_domain}`"
+
+    sender_bits = []
+    if name := src.get("name"):
+        sender_bits.append(f"**{name}**")
+    if base := src.get("base_domain"):
+        sender_bits.append(f"`{base}`")
+    sender_line = " ".join(sender_bits) + "\n" if sender_bits else ""
 
     from_lines = [f"**Header From:** `{ids.get('header_from', '?')}`",
                   f"**Envelope From:** `{ids.get('envelope_from') or '—'}`"]
@@ -141,7 +154,8 @@ def build_record_embed(record, idx, total):
 
     fields = [
         {"name": "Source",
-         "value": f"**IP:** `{src.get('ip_address', '?')}` ({src.get('country', '??')})\n"
+         "value": sender_line +
+                  f"**IP:** `{src.get('ip_address', '?')}` ({src.get('country', '??')})\n"
                   f"**rDNS:** `{rdns}`\n**ASN:** {as_str}", "inline": False},
     ]
     if verdict := diagnose_record(record):
