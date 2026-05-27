@@ -90,13 +90,18 @@ def build_record_embed(record, idx, total):
     asn = src.get("asn")
     as_str = f"AS{asn} ({src.get('as_name', '?')})" if asn else "—"
 
+    from_lines = [f"**Header From:** `{ids.get('header_from', '?')}`",
+                  f"**Envelope From:** `{ids.get('envelope_from') or '—'}`"]
+    if env_to := ids.get("envelope_to"):
+        from_lines.append(f"**Envelope To:** `{env_to}`")
+
     fields = [
         {"name": "Source",
          "value": f"**IP:** `{src.get('ip_address', '?')}` ({src.get('country', '??')})\n"
                   f"**rDNS:** `{rdns}`\n**ASN:** {as_str}", "inline": False},
         {"name": "Messages", "value": f"**{record.get('count', 0)}**", "inline": True},
         {"name": "Disposition", "value": f"`{pol.get('disposition', '?')}`", "inline": True},
-        {"name": "Header From", "value": f"`{ids.get('header_from', '?')}`", "inline": True},
+        {"name": "Identifiers", "value": "\n".join(from_lines), "inline": False},
         {"name": "Alignment",
          "value": f"{bool_icon(align.get('dmarc'))} DMARC\n"
                   f"{bool_icon(align.get('spf'))} SPF\n"
