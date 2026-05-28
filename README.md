@@ -25,11 +25,12 @@ Environment variables:
 
 ## Running
 
-Requires Python 3.9+ and `requests`.
+This project uses [uv](https://docs.astral.sh/uv/) for Python and dependency management.
 
 ```sh
-pip install requests
-DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/... ./dmarc_to_discord.py
+uv run dmarc-to-discord
+# or, for local hacking:
+DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/... uv run dmarc-to-discord
 ```
 
 `GET /`, `/health`, and `/healthz` return `200 ok` for liveness checks.
@@ -45,23 +46,26 @@ aggregate_url = http://127.0.0.1:8080/
 
 (parsedmarc also supports `forensic_url` and `smtp_tls_url`; this relay currently only handles the aggregate-report schema.)
 
-## Running as a systemd service
+## Running with Docker
 
-A unit file is included. It expects the script at `/usr/local/bin/dmarc_to_discord.py` and the webhook URL in `/etc/dmarc-to-discord.env`:
+The included `Dockerfile` builds the service with uv. The image:
+
+- exposes port `8080` and binds to `0.0.0.0` inside the container (override with `LISTEN_PORT` / `LISTEN_HOST`);
+- requires the `DISCORD_WEBHOOK_URL` environment variable;
+- runs as an unprivileged user;
+- serves `/healthz` (returns `200 ok`) for container health checks.
 
 ```sh
-sudo install -m 0755 dmarc_to_discord.py /usr/local/bin/
-sudo install -m 0644 dmarc-to-discord.service /etc/systemd/system/
-echo 'DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/...' | sudo tee /etc/dmarc-to-discord.env
-sudo chmod 0600 /etc/dmarc-to-discord.env
-sudo systemctl daemon-reload
-sudo systemctl enable --now dmarc-to-discord.service
+docker build -t dmarc-to-discord .
+docker run -p 8080:8080 -e DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/... dmarc-to-discord
 ```
 
-The unit runs under `DynamicUser=` with the filesystem locked down (`ProtectSystem=strict`, `ProtectHome=true`, no kernel/cgroup access, network restricted to `AF_INET`/`AF_INET6`) and is ordered `Before=parsedmarc.service` so parsedmarc's first POSTs aren't refused.
+Any platform that builds from a Dockerfile can deploy it: point it at this
+repository, set `DISCORD_WEBHOOK_URL`, expose port `8080`, and use `/healthz`
+as the health check.
 
 ## Notes
 
-- The server speaks plain HTTP. Bind to `127.0.0.1` (the default) and run parsedmarc on the same host, or terminate TLS in front of it.
+- The server speaks plain HTTP. Terminate TLS in front of it, or keep it on a private network with parsedmarc.
 - Discord 429s are honored via `retry_after`; there's a 0.5 s gap between messages to stay friendly to the rate limiter.
 - No persistence — if Discord is down when a report arrives, the report is dropped (parsedmarc will not retry).

@@ -1,0 +1,16 @@
+[project]
+name = "dmarc-to-discord"
+version = "0.1.0"
+description = "Relay parsedmarc aggregate-report webhooks to a Discord webhook"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "requests>=2.31",
+]
+
+[project.scripts]
+dmarc-to-discord = "dmarc_to_discord:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
