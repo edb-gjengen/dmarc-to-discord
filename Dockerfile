@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM ghcr.io/astral-sh/uv:python3.14-bookworm-slim
+FROM ghcr.io/astral-sh/uv:python3.14-alpine
 
 # uv configuration: compile bytecode for faster startup, copy (not link)
 # packages out of the build cache, and keep the managed venv at /app/.venv.
@@ -24,7 +24,7 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --locked --no-dev
 
 # Run unprivileged.
-RUN useradd --system --no-create-home --uid 10001 appuser
+RUN adduser -S -H -u 10001 appuser
 USER appuser
 
 # Bind to all interfaces inside the container
