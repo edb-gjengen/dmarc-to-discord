@@ -20,8 +20,11 @@ Environment variables:
 | Variable | Default | Description |
 | --- | --- | --- |
 | `DISCORD_WEBHOOK_URL` | *(required)* | Discord channel webhook URL |
+| `WEBHOOK_SECRET` | *(unset)* | if set, POSTs must arrive at `/<secret>`; mismatches get `404`. Leave unset to disable the guard |
 | `LISTEN_HOST` | `127.0.0.1` | bind address |
 | `LISTEN_PORT` | `8080` | bind port |
+
+When the relay is reachable beyond a trusted private network, set `WEBHOOK_SECRET` to a long random string (e.g. `openssl rand -hex 32`) and put it in the parsedmarc URL — it's a shared secret, so keep TLS in front of it. The secret is compared in constant time, and the health endpoints (`/`, `/health`, `/healthz`) stay open regardless.
 
 ## Running
 
@@ -42,6 +45,8 @@ In `parsedmarc.ini`:
 ```ini
 [webhook]
 aggregate_url = http://127.0.0.1:8080/
+# with WEBHOOK_SECRET set:
+# aggregate_url = https://dmarc.example.com/<secret>
 ```
 
 (parsedmarc also supports `forensic_url` and `smtp_tls_url`; this relay currently only handles the aggregate-report schema.)
@@ -52,12 +57,16 @@ The included `Dockerfile` builds the service with uv. The image:
 
 - exposes port `8080` and binds to `0.0.0.0` inside the container (override with `LISTEN_PORT` / `LISTEN_HOST`);
 - requires the `DISCORD_WEBHOOK_URL` environment variable;
+- honors `WEBHOOK_SECRET` for the path-based auth guard (recommended when public);
 - runs as an unprivileged user;
 - serves `/healthz` (returns `200 ok`) for container health checks.
 
 ```sh
 docker build -t dmarc-to-discord .
-docker run -p 8080:8080 -e DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/... dmarc-to-discord
+docker run -p 8080:8080 \
+  -e DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/... \
+  -e WEBHOOK_SECRET=$(openssl rand -hex 32) \
+  dmarc-to-discord
 ```
 
 Any platform that builds from a Dockerfile can deploy it: point it at this

@@ -8,12 +8,14 @@ it to Discord embeds and forward.
 
 Env vars:
     DISCORD_WEBHOOK_URL   required
+    WEBHOOK_SECRET        optional; if set, POSTs must arrive at /<secret>
     LISTEN_HOST           default 127.0.0.1
     LISTEN_PORT           default 8080
 """
 
 from __future__ import annotations
 
+import hmac
 import json
 import logging
 import os
@@ -21,10 +23,12 @@ import sys
 import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any
+from urllib.parse import urlsplit
 
 import requests
 
 DISCORD_WEBHOOK_URL = os.environ.get("DISCORD_WEBHOOK_URL", "")
+WEBHOOK_SECRET = os.environ.get("WEBHOOK_SECRET", "")
 LISTEN_HOST = os.environ.get("LISTEN_HOST", "127.0.0.1")
 LISTEN_PORT = int(os.environ.get("LISTEN_PORT", "8080"))
 
@@ -217,7 +221,21 @@ def send_to_discord(report):
 
 
 class Handler(BaseHTTPRequestHandler):
+    def _authorized(self) -> bool:
+        # When no secret is configured the guard is disabled (local convenience).
+        # Otherwise the request path must equal "/<secret>"; parsedmarc preserves
+        # the full aggregate_url, so the secret rides along in the path. Constant-
+        # time compare avoids leaking the secret via response timing.
+        if not WEBHOOK_SECRET:
+            return True
+        path = urlsplit(self.path).path
+        return hmac.compare_digest(path, "/" + WEBHOOK_SECRET)
+
     def do_POST(self):
+        if not self._authorized():
+            # 404 (not 401) so the endpoint doesn't advertise that it exists.
+            self.send_error(404)
+            return
         length = int(self.headers.get("Content-Length", 0))
         body = self.rfile.read(length)
         try:
@@ -255,6 +273,10 @@ def main():
                         format="%(asctime)s %(levelname)s %(message)s")
     srv = ThreadingHTTPServer((LISTEN_HOST, LISTEN_PORT), Handler)
     logging.info("listening on %s:%d", LISTEN_HOST, LISTEN_PORT)
+    if WEBHOOK_SECRET:
+        logging.info("secret guard enabled; POST to /<WEBHOOK_SECRET>")
+    else:
+        logging.warning("WEBHOOK_SECRET unset; accepting unauthenticated POSTs on any path")
     srv.serve_forever()
 
 
