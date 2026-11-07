@@ -8,10 +8,12 @@ parsedmarc parses DMARC aggregate reports from your inbox and POSTs each one as 
 
 Each report produces:
 
-- **1 metadata embed** — reporter, report ID, timespan, published policy (`p`, `sp`, `adkim`, `aspf`, `pct`, `fo`), and a pass/total summary.
-- **1 embed per record** — source IP/country/rDNS/ASN, message count, disposition, header-from, DMARC/SPF/DKIM alignment, policy-evaluated SPF/DKIM, raw auth results, and any policy override reasons.
+- **1 metadata embed** — reporter (with the reporting software, when the report names it), report ID, timespan, published policy, and a pass/total summary. The policy shows `p`, `sp`, `adkim` and `aspf`, plus whichever of `pct`, `fo` (RFC 7489) and `np`, `t`, the discovery method (RFC 9990) the report carries.
+- **1 embed per record** — source IP/country/rDNS/ASN, message count, disposition, header-from, DMARC/SPF/DKIM alignment, policy-evaluated SPF/DKIM, raw auth results (with the reporter's note on each, when it gives one), and any policy override reasons.
 
-Embeds are colored green (DMARC aligned), red (quarantine/reject), or orange (anything else). Discord allows max 10 embeds per message, so larger reports are split across multiple messages.
+Embeds are colored green (DMARC aligned), red (quarantine/reject), or orange (anything else). Discord allows at most 10 embeds and 6000 characters of embed text per message, so larger reports are split across multiple messages.
+
+Tested against parsedmarc 11.2.1's output; fields a report leaves out (parsedmarc sends them as `null`) are left out of the embed rather than shown as `None`.
 
 ## Configuration
 
@@ -78,3 +80,13 @@ as the health check.
 - The server speaks plain HTTP. Terminate TLS in front of it, or keep it on a private network with parsedmarc.
 - Discord 429s are honored via `retry_after`; there's a 0.5 s gap between messages to stay friendly to the rate limiter.
 - No persistence — if Discord is down when a report arrives, the report is dropped (parsedmarc will not retry).
+
+## Testing
+
+```sh
+uv run python -m unittest
+```
+
+`tests/fixtures/` holds parsedmarc 11.2.1's JSON for the sample aggregate reports in
+[parsedmarc's repository](https://github.com/domainaware/parsedmarc/tree/master/samples/aggregate),
+parsed with `--offline`; regenerate it after a parsedmarc upgrade that changes the report schema.

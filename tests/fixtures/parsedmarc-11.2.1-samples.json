@@ -1,0 +1,2433 @@
+[
+ {
+  "xml_schema": "draft",
+  "xml_namespace": null,
+  "report_metadata": {
+   "org_name": "veeam.com",
+   "org_email": "noreply.it.dmarc@veeam.com",
+   "org_extra_contact_info": null,
+   "report_id": "sonexushealth.com:1530233361",
+   "begin_date": "2018-06-27 21:00:00",
+   "end_date": "2018-06-28 21:00:00",
+   "timespan_requires_normalization": false,
+   "original_timespan_seconds": 86400,
+   "errors": [],
+   "generator": null
+  },
+  "policy_published": {
+   "domain": "example.com",
+   "adkim": "r",
+   "aspf": "r",
+   "p": "none",
+   "sp": "none",
+   "pct": "100",
+   "fo": null,
+   "np": null,
+   "testing": null,
+   "discovery_method": null
+  },
+  "records": [
+   {
+    "source": {
+     "ip_address": "199.230.200.36",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "Cardinal Health",
+     "type": "Healthcare",
+     "asn": 14639,
+     "as_name": "Cardinal Health, Inc.",
+     "as_domain": "cardinal.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2018-06-27 21:00:00",
+    "interval_end": "2018-06-28 21:00:00"
+   }
+  ]
+ },
+ {
+  "xml_schema": "draft",
+  "xml_namespace": null,
+  "report_metadata": {
+   "org_name": "accurateplastics.com",
+   "org_email": "administrator@accurateplastics.com",
+   "org_extra_contact_info": null,
+   "report_id": "example.com:1538463741",
+   "begin_date": "2018-10-01 17:07:12",
+   "end_date": "2018-10-01 17:07:12",
+   "timespan_requires_normalization": false,
+   "original_timespan_seconds": 0,
+   "errors": [],
+   "generator": null
+  },
+  "policy_published": {
+   "domain": "example.com",
+   "adkim": "r",
+   "aspf": "r",
+   "p": "none",
+   "sp": "reject",
+   "pct": "100",
+   "fo": null,
+   "np": null,
+   "testing": null,
+   "discovery_method": null
+  },
+  "records": [
+   {
+    "source": {
+     "ip_address": "12.20.127.122",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2018-10-01 17:07:12",
+    "interval_end": "2018-10-01 17:07:12"
+   }
+  ]
+ },
+ {
+  "xml_schema": "draft",
+  "xml_namespace": null,
+  "report_metadata": {
+   "org_name": "Mimecast",
+   "org_email": "no-reply@au-1.mimecastreport.com",
+   "org_extra_contact_info": "https://community.mimecast.com/s/knowledge",
+   "report_id": "157a5fe30ec76f4bc0d8bccfc96c118a167a1280fee7c7465af5115e73082e5e",
+   "begin_date": "2023-08-30 00:00:00",
+   "end_date": "2023-08-30 23:59:59",
+   "timespan_requires_normalization": false,
+   "original_timespan_seconds": 86399,
+   "errors": [],
+   "generator": null
+  },
+  "policy_published": {
+   "domain": "ab.id.au",
+   "adkim": "r",
+   "aspf": "r",
+   "p": "reject",
+   "sp": "none",
+   "pct": "100",
+   "fo": null,
+   "np": null,
+   "testing": null,
+   "discovery_method": null
+  },
+  "records": [
+   {
+    "source": {
+     "ip_address": "40.93.199.22",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "Microsoft",
+     "type": "Technology",
+     "asn": 8075,
+     "as_name": "Microsoft Corporation",
+     "as_domain": "microsoft.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": true,
+     "dkim": true,
+     "dmarc": true
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "pass",
+     "spf": "pass",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "ab.id.au",
+     "envelope_from": "ab.id.au",
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [
+      {
+       "domain": "ab.id.au",
+       "selector": "selector1",
+       "result": "pass",
+       "human_result": null
+      }
+     ],
+     "spf": [
+      {
+       "domain": "ab.id.au",
+       "scope": "mfrom",
+       "result": "pass",
+       "human_result": null
+      }
+     ]
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2023-08-30 00:00:00",
+    "interval_end": "2023-08-30 23:59:59"
+   }
+  ]
+ },
+ {
+  "xml_schema": "1.0",
+  "xml_namespace": null,
+  "report_metadata": {
+   "org_name": "usssa.com",
+   "org_email": "postmaster@usssa.com",
+   "org_extra_contact_info": null,
+   "report_id": "8953b4d4a4ee4218b6ac0e2cb2667ee1",
+   "begin_date": "2018-10-06 00:00:00",
+   "end_date": "2018-10-06 23:59:59",
+   "timespan_requires_normalization": false,
+   "original_timespan_seconds": 86399,
+   "errors": [],
+   "generator": null
+  },
+  "policy_published": {
+   "domain": "example.com",
+   "adkim": "r",
+   "aspf": "r",
+   "p": "none",
+   "sp": "none",
+   "pct": "100",
+   "fo": "0",
+   "np": null,
+   "testing": null,
+   "discovery_method": null
+  },
+  "records": [
+   {
+    "source": {
+     "ip_address": "12.20.127.40",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "envelope_from": null,
+     "header_from": "example.com",
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2018-10-06 00:00:00",
+    "interval_end": "2018-10-06 23:59:59"
+   },
+   {
+    "source": {
+     "ip_address": "199.230.200.36",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "Cardinal Health",
+     "type": "Healthcare",
+     "asn": 14639,
+     "as_name": "Cardinal Health, Inc.",
+     "as_domain": "cardinal.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "envelope_from": null,
+     "header_from": "example.com",
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2018-10-06 00:00:00",
+    "interval_end": "2018-10-06 23:59:59"
+   }
+  ]
+ },
+ {
+  "xml_schema": "1.0",
+  "xml_namespace": null,
+  "report_metadata": {
+   "org_name": "addisonfoods.com",
+   "org_email": "postmaster@addisonfoods.com",
+   "org_extra_contact_info": null,
+   "report_id": "3ceb5548498640beaeb47327e202b0b9",
+   "begin_date": "2018-09-05 00:00:00",
+   "end_date": "2018-09-05 23:59:59",
+   "timespan_requires_normalization": false,
+   "original_timespan_seconds": 86399,
+   "errors": [],
+   "generator": null
+  },
+  "policy_published": {
+   "domain": "example.com",
+   "adkim": "r",
+   "aspf": "r",
+   "p": "none",
+   "sp": "none",
+   "pct": "100",
+   "fo": "0",
+   "np": null,
+   "testing": null,
+   "discovery_method": null
+  },
+  "records": [
+   {
+    "source": {
+     "ip_address": "109.203.100.17",
+     "reverse_dns": null,
+     "country": "GB",
+     "base_domain": null,
+     "name": "Node4",
+     "type": "MSP",
+     "asn": 31727,
+     "as_name": "Node4 Limited",
+     "as_domain": "node4.co.uk"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "envelope_from": "example.com",
+     "header_from": "example.com",
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [
+      {
+       "domain": "toptierhighticket.club",
+       "selector": "default",
+       "result": "pass",
+       "human_result": null
+      }
+     ],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2018-09-05 00:00:00",
+    "interval_end": "2018-09-05 23:59:59"
+   }
+  ]
+ },
+ {
+  "xml_schema": "1.0",
+  "xml_namespace": "urn:ietf:params:xml:ns:dmarc-2.0",
+  "report_metadata": {
+   "org_name": "Sample Reporter",
+   "org_email": "report_sender@example-reporter.com",
+   "org_extra_contact_info": "...",
+   "report_id": "3v98abbp8ya9n3va8yr8oa3ya",
+   "begin_date": "1979-08-07 00:00:00",
+   "end_date": "1979-08-07 23:59:59",
+   "timespan_requires_normalization": false,
+   "original_timespan_seconds": 86399,
+   "errors": [],
+   "generator": "Example DMARC Aggregate Reporter v1.2"
+  },
+  "policy_published": {
+   "domain": "example.com",
+   "adkim": "r",
+   "aspf": "r",
+   "p": "quarantine",
+   "sp": "none",
+   "pct": null,
+   "fo": null,
+   "np": "none",
+   "testing": "n",
+   "discovery_method": "treewalk"
+  },
+  "records": [
+   {
+    "source": {
+     "ip_address": "192.0.2.123",
+     "reverse_dns": null,
+     "country": null,
+     "base_domain": null,
+     "name": null,
+     "type": null,
+     "asn": null,
+     "as_name": null,
+     "as_domain": null
+    },
+    "count": 123,
+    "alignment": {
+     "spf": false,
+     "dkim": true,
+     "dmarc": true
+    },
+    "policy_evaluated": {
+     "disposition": "pass",
+     "dkim": "pass",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "envelope_from": "example.com",
+     "header_from": "example.com",
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [
+      {
+       "domain": "example.com",
+       "selector": "abc123",
+       "result": "pass",
+       "human_result": null
+      }
+     ],
+     "spf": [
+      {
+       "domain": "example.com",
+       "scope": "mfrom",
+       "result": "fail",
+       "human_result": null
+      }
+     ]
+    },
+    "normalized_timespan": false,
+    "interval_begin": "1979-08-07 00:00:00",
+    "interval_end": "1979-08-07 23:59:59"
+   }
+  ]
+ },
+ {
+  "xml_schema": "1.0",
+  "xml_namespace": null,
+  "report_metadata": {
+   "org_name": "example.org",
+   "org_email": "noreply-dmarc-support@example.org",
+   "org_extra_contact_info": "https://support.example.org/dmarc",
+   "report_id": "20240125141224705995",
+   "begin_date": "2024-01-25 05:12:24",
+   "end_date": "2024-01-25 12:28:53",
+   "timespan_requires_normalization": false,
+   "original_timespan_seconds": 26189,
+   "errors": [],
+   "generator": null
+  },
+  "policy_published": {
+   "domain": "example.com",
+   "adkim": "r",
+   "aspf": "r",
+   "p": "quarantine",
+   "sp": "quarantine",
+   "pct": "100",
+   "fo": "1",
+   "np": null,
+   "testing": null,
+   "discovery_method": null
+  },
+  "records": [
+   {
+    "source": {
+     "ip_address": "198.51.100.123",
+     "reverse_dns": null,
+     "country": null,
+     "base_domain": null,
+     "name": null,
+     "type": null,
+     "asn": null,
+     "as_name": null,
+     "as_domain": null
+    },
+    "count": 2,
+    "alignment": {
+     "spf": false,
+     "dkim": true,
+     "dmarc": true
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "pass",
+     "spf": "fail",
+     "policy_override_reasons": [
+      {
+       "type": null,
+       "comment": null
+      }
+     ]
+    },
+    "identifiers": {
+     "envelope_from": "example.edu",
+     "header_from": "example.com",
+     "envelope_to": "example.net"
+    },
+    "auth_results": {
+     "dkim": [
+      {
+       "domain": "example.com",
+       "selector": "example",
+       "result": "pass",
+       "human_result": "2048-bit key"
+      }
+     ],
+     "spf": [
+      {
+       "domain": "example.edu",
+       "scope": "mfrom",
+       "result": "pass",
+       "human_result": null
+      }
+     ]
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-01-25 05:12:24",
+    "interval_end": "2024-01-25 12:28:53"
+   }
+  ]
+ },
+ {
+  "xml_schema": "2.0",
+  "xml_namespace": null,
+  "report_metadata": {
+   "org_name": "example.net",
+   "org_email": "postmaster@example.net",
+   "org_extra_contact_info": null,
+   "report_id": "dmarcbis-test-report-001",
+   "begin_date": "2023-11-14 22:13:20",
+   "end_date": "2023-11-15 22:13:19",
+   "timespan_requires_normalization": false,
+   "original_timespan_seconds": 86399,
+   "errors": [],
+   "generator": null
+  },
+  "policy_published": {
+   "domain": "example.com",
+   "adkim": "s",
+   "aspf": "s",
+   "p": "reject",
+   "sp": "quarantine",
+   "pct": null,
+   "fo": "1",
+   "np": "reject",
+   "testing": "y",
+   "discovery_method": "treewalk"
+  },
+  "records": [
+   {
+    "source": {
+     "ip_address": "198.51.100.1",
+     "reverse_dns": null,
+     "country": null,
+     "base_domain": null,
+     "name": null,
+     "type": null,
+     "asn": null,
+     "as_name": null,
+     "as_domain": null
+    },
+    "count": 5,
+    "alignment": {
+     "spf": true,
+     "dkim": true,
+     "dmarc": true
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "pass",
+     "spf": "pass",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "envelope_from": "example.com",
+     "header_from": "example.com",
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [
+      {
+       "domain": "example.com",
+       "selector": "selector1",
+       "result": "pass",
+       "human_result": null
+      }
+     ],
+     "spf": [
+      {
+       "domain": "example.com",
+       "scope": "mfrom",
+       "result": "pass",
+       "human_result": null
+      }
+     ]
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2023-11-14 22:13:20",
+    "interval_end": "2023-11-15 22:13:19"
+   },
+   {
+    "source": {
+     "ip_address": "203.0.113.10",
+     "reverse_dns": null,
+     "country": null,
+     "base_domain": null,
+     "name": null,
+     "type": null,
+     "asn": null,
+     "as_name": null,
+     "as_domain": null
+    },
+    "count": 2,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "reject",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": [
+      {
+       "type": "other",
+       "comment": "sender not authorized"
+      }
+     ]
+    },
+    "identifiers": {
+     "envelope_from": "spoofed.example.com",
+     "header_from": "example.com",
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": [
+      {
+       "domain": "spoofed.example.com",
+       "scope": "mfrom",
+       "result": "fail",
+       "human_result": null
+      }
+     ]
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2023-11-14 22:13:20",
+    "interval_end": "2023-11-15 22:13:19"
+   }
+  ]
+ },
+ {
+  "xml_schema": "draft",
+  "xml_namespace": null,
+  "report_metadata": {
+   "org_name": "accurateplastics.com",
+   "org_email": "administrator@accurateplastics.com",
+   "org_extra_contact_info": null,
+   "report_id": "example.com:1711897200",
+   "begin_date": "2024-03-31 15:00:00",
+   "end_date": "2024-04-01 15:00:00",
+   "timespan_requires_normalization": false,
+   "original_timespan_seconds": 86400,
+   "errors": [],
+   "generator": null
+  },
+  "policy_published": {
+   "domain": "example.com",
+   "adkim": "r",
+   "aspf": "r",
+   "p": "none",
+   "sp": "reject",
+   "pct": "100",
+   "fo": null,
+   "np": null,
+   "testing": null,
+   "discovery_method": null
+  },
+  "records": [
+   {
+    "source": {
+     "ip_address": "12.20.121.1",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-31 15:00:00",
+    "interval_end": "2024-04-01 15:00:00"
+   },
+   {
+    "source": {
+     "ip_address": "12.20.121.2",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-31 15:00:00",
+    "interval_end": "2024-04-01 15:00:00"
+   },
+   {
+    "source": {
+     "ip_address": "12.20.121.3",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-31 15:00:00",
+    "interval_end": "2024-04-01 15:00:00"
+   },
+   {
+    "source": {
+     "ip_address": "12.20.121.4",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-31 15:00:00",
+    "interval_end": "2024-04-01 15:00:00"
+   },
+   {
+    "source": {
+     "ip_address": "12.20.121.5",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-31 15:00:00",
+    "interval_end": "2024-04-01 15:00:00"
+   },
+   {
+    "source": {
+     "ip_address": "12.20.121.6",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-31 15:00:00",
+    "interval_end": "2024-04-01 15:00:00"
+   },
+   {
+    "source": {
+     "ip_address": "12.20.121.7",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-31 15:00:00",
+    "interval_end": "2024-04-01 15:00:00"
+   },
+   {
+    "source": {
+     "ip_address": "12.20.121.8",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-31 15:00:00",
+    "interval_end": "2024-04-01 15:00:00"
+   },
+   {
+    "source": {
+     "ip_address": "12.20.121.9",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-31 15:00:00",
+    "interval_end": "2024-04-01 15:00:00"
+   },
+   {
+    "source": {
+     "ip_address": "12.20.121.10",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-31 15:00:00",
+    "interval_end": "2024-04-01 15:00:00"
+   },
+   {
+    "source": {
+     "ip_address": "12.20.121.11",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-31 15:00:00",
+    "interval_end": "2024-04-01 15:00:00"
+   },
+   {
+    "source": {
+     "ip_address": "12.20.121.12",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-31 15:00:00",
+    "interval_end": "2024-04-01 15:00:00"
+   },
+   {
+    "source": {
+     "ip_address": "12.20.121.13",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-31 15:00:00",
+    "interval_end": "2024-04-01 15:00:00"
+   },
+   {
+    "source": {
+     "ip_address": "12.20.121.14",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-31 15:00:00",
+    "interval_end": "2024-04-01 15:00:00"
+   },
+   {
+    "source": {
+     "ip_address": "12.20.121.15",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-31 15:00:00",
+    "interval_end": "2024-04-01 15:00:00"
+   },
+   {
+    "source": {
+     "ip_address": "12.20.121.16",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-31 15:00:00",
+    "interval_end": "2024-04-01 15:00:00"
+   },
+   {
+    "source": {
+     "ip_address": "12.20.121.17",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-31 15:00:00",
+    "interval_end": "2024-04-01 15:00:00"
+   },
+   {
+    "source": {
+     "ip_address": "12.20.121.18",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-31 15:00:00",
+    "interval_end": "2024-04-01 15:00:00"
+   },
+   {
+    "source": {
+     "ip_address": "12.20.121.19",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-31 15:00:00",
+    "interval_end": "2024-04-01 15:00:00"
+   },
+   {
+    "source": {
+     "ip_address": "12.20.121.20",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-31 15:00:00",
+    "interval_end": "2024-04-01 15:00:00"
+   },
+   {
+    "source": {
+     "ip_address": "12.20.121.21",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-31 15:00:00",
+    "interval_end": "2024-04-01 15:00:00"
+   },
+   {
+    "source": {
+     "ip_address": "12.20.121.22",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-31 15:00:00",
+    "interval_end": "2024-04-01 15:00:00"
+   },
+   {
+    "source": {
+     "ip_address": "12.20.121.23",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-31 15:00:00",
+    "interval_end": "2024-04-01 15:00:00"
+   },
+   {
+    "source": {
+     "ip_address": "12.20.121.24",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-31 15:00:00",
+    "interval_end": "2024-04-01 15:00:00"
+   },
+   {
+    "source": {
+     "ip_address": "12.20.121.25",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-31 15:00:00",
+    "interval_end": "2024-04-01 15:00:00"
+   },
+   {
+    "source": {
+     "ip_address": "12.20.121.26",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-31 15:00:00",
+    "interval_end": "2024-04-01 15:00:00"
+   },
+   {
+    "source": {
+     "ip_address": "12.20.121.27",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-31 15:00:00",
+    "interval_end": "2024-04-01 15:00:00"
+   },
+   {
+    "source": {
+     "ip_address": "12.20.121.28",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-31 15:00:00",
+    "interval_end": "2024-04-01 15:00:00"
+   },
+   {
+    "source": {
+     "ip_address": "12.20.121.29",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-31 15:00:00",
+    "interval_end": "2024-04-01 15:00:00"
+   },
+   {
+    "source": {
+     "ip_address": "12.20.121.30",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "AT&T",
+     "type": "ISP",
+     "asn": 7018,
+     "as_name": "AT&T Enterprises, LLC",
+     "as_domain": "att.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-31 15:00:00",
+    "interval_end": "2024-04-01 15:00:00"
+   }
+  ]
+ },
+ {
+  "xml_schema": "draft",
+  "xml_namespace": null,
+  "report_metadata": {
+   "org_name": "acme.com",
+   "org_email": "noreply-dmarc-support@acme.com",
+   "org_extra_contact_info": "http://acme.com/dmarc/support",
+   "report_id": "9391651994964116463",
+   "begin_date": "2012-04-28 00:00:00",
+   "end_date": "2012-04-28 23:59:59",
+   "timespan_requires_normalization": false,
+   "original_timespan_seconds": 86399,
+   "errors": [],
+   "generator": null
+  },
+  "policy_published": {
+   "domain": "example.com",
+   "adkim": "r",
+   "aspf": "r",
+   "p": "none",
+   "sp": "none",
+   "pct": "100",
+   "fo": null,
+   "np": null,
+   "testing": null,
+   "discovery_method": null
+  },
+  "records": [
+   {
+    "source": {
+     "ip_address": "72.150.241.94",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "Amazon",
+     "type": "Technology",
+     "asn": 16509,
+     "as_name": "Amazon.com, Inc.",
+     "as_domain": "amazon.com"
+    },
+    "count": 2,
+    "alignment": {
+     "spf": true,
+     "dkim": false,
+     "dmarc": true
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "pass",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": "example.com",
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [
+      {
+       "domain": "example.com",
+       "selector": "none",
+       "result": "fail",
+       "human_result": null
+      }
+     ],
+     "spf": [
+      {
+       "domain": "example.com",
+       "scope": "mfrom",
+       "result": "pass",
+       "human_result": null
+      }
+     ]
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2012-04-28 00:00:00",
+    "interval_end": "2012-04-28 23:59:59"
+   }
+  ]
+ },
+ {
+  "xml_schema": "draft",
+  "xml_namespace": null,
+  "report_metadata": {
+   "org_name": "XYZ Corporation",
+   "org_email": "admin@estadocuenta1.infonacot.gob.mx",
+   "org_extra_contact_info": "http://estadocuenta1.infonacot.gob.mx",
+   "report_id": "2940",
+   "begin_date": "2018-09-13 15:41:42",
+   "end_date": "2018-09-14 15:41:42",
+   "timespan_requires_normalization": false,
+   "original_timespan_seconds": 86400,
+   "errors": [],
+   "generator": null
+  },
+  "policy_published": {
+   "domain": "example.com",
+   "adkim": "r",
+   "aspf": "r",
+   "p": "none",
+   "sp": "none",
+   "pct": null,
+   "fo": null,
+   "np": null,
+   "testing": null,
+   "discovery_method": null
+  },
+  "records": [
+   {
+    "source": {
+     "ip_address": "148.243.137.254",
+     "reverse_dns": null,
+     "country": "MX",
+     "base_domain": null,
+     "name": "Axtel",
+     "type": "ISP",
+     "asn": 6503,
+     "as_name": "Axtel, S.A.B. de C.V.",
+     "as_domain": "axtel.mx"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.com",
+     "envelope_from": null,
+     "envelope_to": "estadocuenta1.infonacot.gob.mx"
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2018-09-13 15:41:42",
+    "interval_end": "2018-09-14 15:41:42"
+   }
+  ]
+ },
+ {
+  "xml_schema": "1.0",
+  "xml_namespace": null,
+  "report_metadata": {
+   "org_name": "example.net",
+   "org_email": "postmaster@example.net",
+   "org_extra_contact_info": null,
+   "report_id": "b043f0e264cf4ea995e93765242f6dfb",
+   "begin_date": "2018-06-19 00:00:00",
+   "end_date": "2018-06-19 23:59:59",
+   "timespan_requires_normalization": false,
+   "original_timespan_seconds": 86399,
+   "errors": [],
+   "generator": null
+  },
+  "policy_published": {
+   "domain": "example.com",
+   "adkim": "r",
+   "aspf": "r",
+   "p": "none",
+   "sp": "none",
+   "pct": "100",
+   "fo": "0",
+   "np": null,
+   "testing": null,
+   "discovery_method": null
+  },
+  "records": [
+   {
+    "source": {
+     "ip_address": "199.230.200.36",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "Cardinal Health",
+     "type": "Healthcare",
+     "asn": 14639,
+     "as_name": "Cardinal Health, Inc.",
+     "as_domain": "cardinal.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "envelope_from": "example.com",
+     "header_from": "example.com",
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": []
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2018-06-19 00:00:00",
+    "interval_end": "2018-06-19 23:59:59"
+   }
+  ]
+ },
+ {
+  "xml_schema": "1.0",
+  "xml_namespace": "http://www.w3.org/2001/XMLSchema",
+  "report_metadata": {
+   "org_name": "outlook.com",
+   "org_email": "dmarcreport@microsoft.com",
+   "org_extra_contact_info": null,
+   "report_id": "cfeafefe4129445e8c81018bd9177197",
+   "begin_date": "2024-03-30 00:00:00",
+   "end_date": "2024-03-31 00:00:00",
+   "timespan_requires_normalization": false,
+   "original_timespan_seconds": 86400,
+   "errors": [],
+   "generator": null
+  },
+  "policy_published": {
+   "domain": "example.com",
+   "adkim": "r",
+   "aspf": "r",
+   "p": "none",
+   "sp": "none",
+   "pct": "100",
+   "fo": "0",
+   "np": null,
+   "testing": null,
+   "discovery_method": null
+  },
+  "records": [
+   {
+    "source": {
+     "ip_address": "100.24.188.149",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": "Amazon",
+     "type": "Technology",
+     "asn": 14618,
+     "as_name": "Amazon.com, Inc.",
+     "as_domain": "amazon.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "envelope_from": "example.com",
+     "header_from": "example.com",
+     "envelope_to": "hotmail.com"
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": [
+      {
+       "domain": "example.com",
+       "scope": "mfrom",
+       "result": "fail",
+       "human_result": null
+      }
+     ]
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2024-03-30 00:00:00",
+    "interval_end": "2024-03-31 00:00:00"
+   }
+  ]
+ },
+ {
+  "xml_schema": "draft",
+  "xml_namespace": "http://www.w3.org/2001/XMLSchema",
+  "report_metadata": {
+   "org_name": "ikea.com",
+   "org_email": "double-bounce@ikea.com",
+   "org_extra_contact_info": null,
+   "report_id": "aggr_report_2018_10_05_5bc7e9b4f3e8a",
+   "begin_date": "2018-10-04 22:00:00",
+   "end_date": "2018-10-05 22:00:00",
+   "timespan_requires_normalization": false,
+   "original_timespan_seconds": 86400,
+   "errors": [
+    "Invalid XML: no element found: line 47, column 11"
+   ],
+   "generator": null
+  },
+  "policy_published": {
+   "domain": "example.de",
+   "adkim": "r",
+   "aspf": "r",
+   "p": "none",
+   "sp": "none",
+   "pct": "100",
+   "fo": "0",
+   "np": null,
+   "testing": null,
+   "discovery_method": null
+  },
+  "records": [
+   {
+    "source": {
+     "ip_address": "234.234.234.234",
+     "reverse_dns": null,
+     "country": null,
+     "base_domain": null,
+     "name": null,
+     "type": null,
+     "asn": null,
+     "as_name": null,
+     "as_domain": null
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "example.de",
+     "envelope_from": "example.de",
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [
+      {
+       "domain": "example.de",
+       "selector": "none",
+       "result": "pass",
+       "human_result": null
+      }
+     ],
+     "spf": [
+      {
+       "domain": "mailrelay.com",
+       "scope": "helo",
+       "result": "none",
+       "human_result": null
+      }
+     ]
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2018-10-04 22:00:00",
+    "interval_end": "2018-10-05 22:00:00"
+   }
+  ]
+ },
+ {
+  "xml_schema": "draft",
+  "xml_namespace": null,
+  "report_metadata": {
+   "org_name": "google.com",
+   "org_email": "noreply-dmarc-support@google.com",
+   "org_extra_contact_info": "https://support.google.com/a/answer/2466580",
+   "report_id": "949348866075514174",
+   "begin_date": "2019-02-12 00:00:00",
+   "end_date": "2019-02-12 23:59:59",
+   "timespan_requires_normalization": false,
+   "original_timespan_seconds": 86399,
+   "errors": [],
+   "generator": null
+  },
+  "policy_published": {
+   "domain": "borschow.com",
+   "adkim": "r",
+   "aspf": "r",
+   "p": "reject",
+   "sp": "reject",
+   "pct": "100",
+   "fo": null,
+   "np": null,
+   "testing": null,
+   "discovery_method": null
+  },
+  "records": [
+   {
+    "source": {
+     "ip_address": "92.53.116.102",
+     "reverse_dns": null,
+     "country": "RU",
+     "base_domain": null,
+     "name": "Timeweb",
+     "type": "Web Host",
+     "asn": 9123,
+     "as_name": "JSC \"TIMEWEB\"",
+     "as_domain": "timeweb.ru"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "reject",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "borschow.com",
+     "envelope_from": "borschow.com",
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": [
+      {
+       "domain": "borschow.com",
+       "scope": "mfrom",
+       "result": "fail",
+       "human_result": null
+      }
+     ]
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2019-02-12 00:00:00",
+    "interval_end": "2019-02-12 23:59:59"
+   }
+  ]
+ },
+ {
+  "xml_schema": "1.0",
+  "xml_namespace": null,
+  "report_metadata": {
+   "org_name": "FastMail Pty Ltd",
+   "org_email": "reports@fastmaildmarc.com",
+   "org_extra_contact_info": "https://fastmail.com/",
+   "report_id": "102675056",
+   "begin_date": "2018-01-16 00:00:00",
+   "end_date": "2018-01-16 23:59:59",
+   "timespan_requires_normalization": false,
+   "original_timespan_seconds": 86399,
+   "errors": [],
+   "generator": null
+  },
+  "policy_published": {
+   "domain": "indemed.com",
+   "adkim": "r",
+   "aspf": "r",
+   "p": "none",
+   "sp": "none",
+   "pct": "100",
+   "fo": "0",
+   "np": null,
+   "testing": null,
+   "discovery_method": null
+  },
+  "records": [
+   {
+    "source": {
+     "ip_address": "104.195.80.20",
+     "reverse_dns": null,
+     "country": "US",
+     "base_domain": null,
+     "name": null,
+     "type": null,
+     "asn": null,
+     "as_name": null,
+     "as_domain": null
+    },
+    "count": 1,
+    "alignment": {
+     "spf": false,
+     "dkim": false,
+     "dmarc": false
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "fail",
+     "spf": "fail",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "envelope_from": "example.com",
+     "header_from": "example.com",
+     "envelope_to": "fastmail.fm"
+    },
+    "auth_results": {
+     "dkim": [],
+     "spf": [
+      {
+       "domain": "example.com",
+       "scope": "mfrom",
+       "result": "softfail",
+       "human_result": null
+      }
+     ]
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2018-01-16 00:00:00",
+    "interval_end": "2018-01-16 23:59:59"
+   }
+  ]
+ },
+ {
+  "xml_schema": "draft",
+  "xml_namespace": null,
+  "report_metadata": {
+   "org_name": "google.com",
+   "org_email": "noreply-dmarc-support@google.com",
+   "org_extra_contact_info": "https://support.google.com/a/answer/2466580",
+   "report_id": "1627703331531660819",
+   "begin_date": "2019-02-10 00:00:00",
+   "end_date": "2019-02-10 23:59:59",
+   "timespan_requires_normalization": false,
+   "original_timespan_seconds": 86399,
+   "errors": [],
+   "generator": null
+  },
+  "policy_published": {
+   "domain": "twlnet.com",
+   "adkim": "s",
+   "aspf": "s",
+   "p": "reject",
+   "sp": "reject",
+   "pct": "100",
+   "fo": null,
+   "np": null,
+   "testing": null,
+   "discovery_method": null
+  },
+  "records": [
+   {
+    "source": {
+     "ip_address": "87.106.127.28",
+     "reverse_dns": null,
+     "country": "DE",
+     "base_domain": null,
+     "name": "IONOS",
+     "type": "Web Host",
+     "asn": 8560,
+     "as_name": "IONOS SE",
+     "as_domain": "ionos.com"
+    },
+    "count": 1,
+    "alignment": {
+     "spf": true,
+     "dkim": true,
+     "dmarc": true
+    },
+    "policy_evaluated": {
+     "disposition": "none",
+     "dkim": "pass",
+     "spf": "pass",
+     "policy_override_reasons": []
+    },
+    "identifiers": {
+     "header_from": "twlnet.com",
+     "envelope_from": "twlnet.com",
+     "envelope_to": null
+    },
+    "auth_results": {
+     "dkim": [
+      {
+       "domain": "twlnet.com",
+       "selector": "201810",
+       "result": "pass",
+       "human_result": null
+      }
+     ],
+     "spf": [
+      {
+       "domain": "twlnet.com",
+       "scope": "mfrom",
+       "result": "pass",
+       "human_result": null
+      }
+     ]
+    },
+    "normalized_timespan": false,
+    "interval_begin": "2019-02-10 00:00:00",
+    "interval_end": "2019-02-10 23:59:59"
+   }
+  ]
+ }
+]

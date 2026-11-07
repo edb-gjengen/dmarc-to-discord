@@ -32,10 +32,23 @@ WEBHOOK_SECRET = os.environ.get("WEBHOOK_SECRET", "")
 LISTEN_HOST = os.environ.get("LISTEN_HOST", "127.0.0.1")
 LISTEN_PORT = int(os.environ.get("LISTEN_PORT", "8080"))
 
+# Discord's limits: embeds per message, characters in one field's value, and characters
+# across all embeds in a message (titles, field names and values).
 MAX_EMBEDS_PER_MESSAGE = 10
 MAX_FIELD_VALUE_LEN = 1024
+MAX_MESSAGE_EMBED_CHARS = 6000
 
 COLOR_PASS, COLOR_PARTIAL, COLOR_FAIL, COLOR_INFO = 0x2ECC71, 0xF39C12, 0xE74C3C, 0x3498DB
+
+
+def val(d, key, default="—"):
+    """d[key], or `default` when the key is missing or its value is None or empty.
+
+    parsedmarc sends absent report fields as null, so .get(key, default) alone would
+    print "None".
+    """
+    v = (d or {}).get(key)
+    return default if v is None or v == "" else v
 
 
 def truncate(s: str, n: int = MAX_FIELD_VALUE_LEN) -> str:
@@ -68,22 +81,36 @@ def build_metadata_embed(report):
     total = sum(r.get("count", 0) for r in records)
     passing = sum(r.get("count", 0) for r in records if r.get("alignment", {}).get("dmarc"))
 
-    reporter_lines = [meta.get("org_name", "unknown"), meta.get("org_email", "")]
+    reporter_lines = [val(meta, "org_name", "unknown"), val(meta, "org_email", "")]
     if extra := meta.get("org_extra_contact_info"):
         reporter_lines.append(extra)
+    if generator := meta.get("generator"):  # RFC 9990
+        reporter_lines.append(f"*{generator}*")
+
+    # RFC 7489 reports carry pct and fo; RFC 9990 ones drop pct and add np (policy for
+    # non-existent subdomains), t (testing mode) and the policy discovery method.
+    # Each is shown only when the report has it.
+    p_line = f"**p / sp:** `{val(policy, 'p', '?')}` / `{val(policy, 'sp')}`"
+    if np := policy.get("np"):
+        p_line = (f"**p / sp / np:** `{val(policy, 'p', '?')}` / `{val(policy, 'sp')}` "
+                  f"/ `{np}`")
+    extras = [f"**{label}:** `{policy[key]}`" for key, label in
+              (("pct", "pct"), ("fo", "fo"), ("testing", "t"), ("discovery_method", "discovery"))
+              if policy.get(key) not in (None, "")]
+    if (policy.get("testing") or "").lower() == "y":
+        extras.append("*(testing mode)*")
+    policy_lines = [f"**Domain:** `{val(policy, 'domain', '?')}`", p_line,
+                    f"**adkim / aspf:** `{val(policy, 'adkim')}` / `{val(policy, 'aspf')}`"]
+    if extras:
+        policy_lines.append("  •  ".join(extras))
 
     fields = [
         {"name": "Reporter",
          "value": "\n".join(filter(None, reporter_lines)), "inline": True},
-        {"name": "Report ID", "value": f"`{meta.get('report_id', 'unknown')}`", "inline": True},
+        {"name": "Report ID", "value": f"`{val(meta, 'report_id', 'unknown')}`", "inline": True},
         {"name": "Timespan (UTC)",
-         "value": f"{meta.get('begin_date', '?')} →\n{meta.get('end_date', '?')}", "inline": False},
-        {"name": "Published Policy",
-         "value": (f"**Domain:** `{policy.get('domain', '?')}`\n"
-                   f"**p / sp:** `{policy.get('p', '?')}` / `{policy.get('sp', '?')}`\n"
-                   f"**adkim / aspf:** `{policy.get('adkim', '?')}` / `{policy.get('aspf', '?')}`\n"
-                   f"**pct:** `{policy.get('pct') or '100'}`  •  **fo:** `{policy.get('fo', '?')}`"),
-         "inline": False},
+         "value": f"{val(meta, 'begin_date', '?')} →\n{val(meta, 'end_date', '?')}", "inline": False},
+        {"name": "Published Policy", "value": truncate("\n".join(policy_lines)), "inline": False},
         {"name": "Summary",
          "value": f"**Records:** {len(records)}\n**Messages:** {total}\n**DMARC pass:** {passing} / {total}",
          "inline": False},
@@ -92,7 +119,7 @@ def build_metadata_embed(report):
     if errors:
         fields.append({"name": "Errors",
                        "value": truncate("\n".join(f"• {e}" for e in errors)), "inline": False})
-    return {"title": f"DMARC Aggregate Report — {policy.get('domain', 'unknown')}",
+    return {"title": f"DMARC Aggregate Report — {val(policy, 'domain', 'unknown')}",
             "color": COLOR_PARTIAL if errors else COLOR_INFO, "fields": fields}
 
 
@@ -118,18 +145,18 @@ def diagnose_record(record):
     if not spf_results:
         parts.append("SPF not evaluated")
     elif spf_pass:
-        parts.append(f"SPF passed on `{spf_pass.get('domain', '?')}` (not aligned with `{header_from}`)")
+        parts.append(f"SPF passed on `{val(spf_pass, 'domain', '?')}` (not aligned with `{header_from}`)")
     else:
         worst = spf_results[0]
-        parts.append(f"SPF `{worst.get('result', '?')}` on `{worst.get('domain', '?')}`")
+        parts.append(f"SPF `{val(worst, 'result', '?')}` on `{val(worst, 'domain', '?')}`")
 
     dkim_pass = next((r for r in dkim_results if (r.get("result") or "").lower() == "pass"), None)
     if not dkim_results:
         parts.append("DKIM not signed")
     elif dkim_pass:
-        parts.append(f"DKIM passed on `{dkim_pass.get('domain', '?')}` (not aligned with `{header_from}`)")
+        parts.append(f"DKIM passed on `{val(dkim_pass, 'domain', '?')}` (not aligned with `{header_from}`)")
     else:
-        failed = ", ".join(f"`{r.get('domain', '?')}`/`{r.get('selector', '?')}`→`{r.get('result', '?')}`"
+        failed = ", ".join(f"`{val(r, 'domain', '?')}`/`{val(r, 'selector', '?')}`→`{val(r, 'result', '?')}`"
                            for r in dkim_results)
         parts.append(f"DKIM failed ({failed})")
 
@@ -141,7 +168,7 @@ def build_record_embed(record, idx, total, policy_domain=None):
     pol, ids, auth = record.get("policy_evaluated", {}), record.get("identifiers", {}), record.get("auth_results", {})
     rdns = src.get("reverse_dns") or "—"
     asn = src.get("asn")
-    as_str = f"AS{asn} ({src.get('as_name', '?')})" if asn else "—"
+    as_str = f"AS{asn} ({val(src, 'as_name', '?')})" if asn else "—"
     if asn and (as_domain := src.get("as_domain")):
         as_str += f" — `{as_domain}`"
 
@@ -164,48 +191,72 @@ def build_record_embed(record, idx, total, policy_domain=None):
     fields = [
         {"name": "Source",
          "value": sender_line +
-                  f"**IP:** `{src.get('ip_address', '?')}` ({src.get('country', '??')})\n"
+                  f"**IP:** `{val(src, 'ip_address', '?')}` ({val(src, 'country', '??')})\n"
                   f"**rDNS:** `{rdns}`\n**ASN:** {as_str}", "inline": False},
     ]
     if verdict := diagnose_record(record):
         fields.append({"name": "Verdict", "value": truncate(verdict), "inline": False})
     fields += [
         {"name": "Messages", "value": f"**{record.get('count', 0)}**", "inline": True},
-        {"name": "Disposition", "value": f"`{pol.get('disposition', '?')}`", "inline": True},
+        {"name": "Disposition", "value": f"`{val(pol, 'disposition', '?')}`", "inline": True},
         {"name": "Identifiers", "value": "\n".join(from_lines), "inline": False},
         {"name": "Alignment",
          "value": f"{bool_icon(align.get('dmarc'))} DMARC\n"
                   f"{bool_icon(align.get('spf'))} SPF\n"
                   f"{bool_icon(align.get('dkim'))} DKIM", "inline": True},
         {"name": "Policy Evaluated",
-         "value": f"{result_icon(pol.get('spf'))} SPF: `{pol.get('spf', '?')}`\n"
-                  f"{result_icon(pol.get('dkim'))} DKIM: `{pol.get('dkim', '?')}`", "inline": True},
+         "value": f"{result_icon(pol.get('spf'))} SPF: `{val(pol, 'spf', '?')}`\n"
+                  f"{result_icon(pol.get('dkim'))} DKIM: `{val(pol, 'dkim', '?')}`", "inline": True},
     ]
     for k, label, scope_key in (("dkim", "Auth: DKIM", "selector"), ("spf", "Auth: SPF", "scope")):
         results = auth.get(k, [])
         if not results:
             continue
-        lines = [f"{result_icon(r.get('result'))} `{r.get('domain', '?')}` "
-                 f"({scope_key}=`{r.get(scope_key, '?')}`) → `{r.get('result', '?')}`"
+        # human_result (RFC 9990) is the reporter's own note, such as "2048-bit key".
+        lines = [f"{result_icon(r.get('result'))} `{val(r, 'domain', '?')}` "
+                 f"({scope_key}=`{val(r, scope_key, '?')}`) → `{val(r, 'result', '?')}`"
+                 + (f" — {r['human_result']}" if r.get("human_result") else "")
                  for r in results]
         fields.append({"name": label, "value": truncate("\n".join(lines)), "inline": False})
     if overrides := (pol.get("policy_override_reasons") or []):
-        lines = [f"• `{o.get('type', '?')}`: {o.get('comment', '') or '(no comment)'}"
+        lines = [f"• `{val(o, 'type', '?')}`: {val(o, 'comment', '') or '(no comment)'}"
                  for o in overrides]
         fields.append({"name": "Override Reasons", "value": truncate("\n".join(lines)), "inline": False})
-    return {"title": f"Record {idx}/{total} — {src.get('ip_address', '?')}",
+    return {"title": f"Record {idx}/{total} — {val(src, 'ip_address', '?')}",
             "color": record_color(record), "fields": fields}
 
 
-def send_to_discord(report):
+def embed_chars(embed):
+    """The characters Discord counts toward MAX_MESSAGE_EMBED_CHARS for one embed."""
+    return len(embed.get("title", "")) + sum(
+        len(f["name"]) + len(f["value"]) for f in embed.get("fields", []))
+
+
+def build_messages(report):
+    """The Discord webhook payloads for one report: its embeds, packed in order into
+    messages within MAX_EMBEDS_PER_MESSAGE and MAX_MESSAGE_EMBED_CHARS."""
     embeds = [build_metadata_embed(report)]
     records = report.get("records", [])
     policy_domain = (report.get("policy_published") or {}).get("domain")
     for i, rec in enumerate(records, start=1):
         embeds.append(build_record_embed(rec, i, len(records), policy_domain))
 
-    for i in range(0, len(embeds), MAX_EMBEDS_PER_MESSAGE):
-        payload = {"embeds": embeds[i: i + MAX_EMBEDS_PER_MESSAGE], "username": "parsedmarc"}
+    batches, batch, chars = [], [], 0
+    for embed in embeds:
+        size = embed_chars(embed)
+        if batch and (len(batch) == MAX_EMBEDS_PER_MESSAGE
+                      or chars + size > MAX_MESSAGE_EMBED_CHARS):
+            batches.append(batch)
+            batch, chars = [], 0
+        batch.append(embed)
+        chars += size
+    if batch:
+        batches.append(batch)
+    return [{"embeds": b, "username": "parsedmarc"} for b in batches]
+
+
+def send_to_discord(report):
+    for payload in build_messages(report):
         while True:
             r = requests.post(DISCORD_WEBHOOK_URL, json=payload, timeout=15)
             if r.status_code == 429:
